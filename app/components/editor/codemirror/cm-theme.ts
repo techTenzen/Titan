@@ -40,6 +40,8 @@ function getEditorTheme(settings: EditorSettings) {
     '.cm-line': {
       padding: '0 0 0 4px',
     },
+
+    //cm.focused> .cm.scroller > .cm
     '&.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground': {
       backgroundColor: 'var(--cm-selection-backgroundColorFocused) !important',
       opacity: 'var(--cm-selection-backgroundOpacityFocused, 0.3)',
