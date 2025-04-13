@@ -102,7 +102,7 @@ export const SettingsWindow = ({ open, onClose }: SettingsProps) => {
                     GitHub
                   </a>
                   <a
-                    href="https://titannexus-production.up.railway.app/"
+                    href="https://titannexus-production.up.railway.app/documentation/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className={classNames(styles['settings-button'], 'flex items-center gap-2')}
