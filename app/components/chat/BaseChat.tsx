@@ -309,9 +309,42 @@ export const BaseChat = React.forwardRef<HTMLDivElement, BaseChatProps>(
                 </div>
 
                 {/* Main Heading */}
-                <h1 className="text-3xl lg:text-6xl font-bold text-bolt-elements-textPrimary mb-4 animate-fade-in">
-                  Where ideas begin
-                </h1>
+                {/* Add this style tag at the top of your return statement */}
+                {/* Main Heading */}
+                <style
+                  dangerouslySetInnerHTML={{
+                    __html: `
+  .gradient-text {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    line-height: 1.1;
+    background: linear-gradient(
+      90deg,
+      #30EFFF 0%,
+      #7928CA 33%,
+      #FF3370 66%,
+      #30EFFF 100%
+    );
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: gradientMove 8s linear infinite;
+    letter-spacing: -0.02em;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  `,
+                  }}
+                />
+
+                {/* Then modify the h1 element */}
+                <h1 className="text-5xl lg:text-6xl font-bold mb-4 animate-fade-in gradient-text">Where ideas begin</h1>
+                {/* Main Heading */}
 
                 {/* Subheading */}
                 <p className="text-md lg:text-xl mb-8 text-bolt-elements-textSecondary animate-fade-in animation-delay-200">
