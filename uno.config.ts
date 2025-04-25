@@ -1,25 +1,13 @@
-import fastGlob from 'fast-glob';
-
-const { globSync } = fastGlob;
-import fs from 'node:fs/promises';
-import { basename } from 'node:path';
 import { defineConfig, presetIcons, presetUno, transformerDirectives } from 'unocss';
 
-const iconPaths = globSync('./icons/*.svg');
+const iconNames: string[] = [];
 
 const collectionName = 'bolt';
 
-const customIconCollection = iconPaths.reduce(
-  (acc, iconPath) => {
-    const [iconName] = basename(iconPath).split('.');
-
-    acc[collectionName] ??= {};
-    acc[collectionName][iconName] = async () => fs.readFile(iconPath, 'utf8');
-
-    return acc;
-  },
-  {} as Record<string, Record<string, () => Promise<string>>>,
-);
+// Create a simple collection without file reading
+const customIconCollection = {
+  [collectionName]: {},
+};
 
 const BASE_COLORS = {
   white: '#FFFFFF',
@@ -100,7 +88,7 @@ const COLOR_PRIMITIVES = {
 };
 
 export default defineConfig({
-  safelist: [...Object.keys(customIconCollection[collectionName] || {}).map((x) => `i-bolt:${x}`)],
+  safelist: [...iconNames.map((x) => `i-bolt:${x}`)],
   shortcuts: {
     'bolt-ease-cubic-bezier': 'ease-[cubic-bezier(0.4,0,0.2,1)]',
     'transition-theme': 'transition-[background-color,border-color,color] duration-150 bolt-ease-cubic-bezier',
