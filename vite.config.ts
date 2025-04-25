@@ -31,7 +31,7 @@ export default defineConfig((config: ConfigEnv): UserConfig => {
       nodePolyfills({
         include: ['path', 'buffer', 'process'],
       }) as PluginOption,
-      config.mode !== 'test' && remixCloudflareDevProxy() as PluginOption,
+      config.mode !== 'test' && (remixCloudflareDevProxy() as PluginOption),
       remixVitePlugin({
         future: {
           v3_fetcherPersist: true,
@@ -43,7 +43,7 @@ export default defineConfig((config: ConfigEnv): UserConfig => {
       UnoCSS() as PluginOption,
       tsconfigPaths() as PluginOption,
       chrome129IssuePlugin() as PluginOption,
-      config.mode === 'production' && optimizeCssModules({ apply: 'build' }) as PluginOption,
+      config.mode === 'production' && (optimizeCssModules({ apply: 'build' }) as PluginOption),
     ].filter(Boolean) as PluginOption[],
     envPrefix: [
       'VITE_',
