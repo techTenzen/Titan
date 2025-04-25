@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        moonwalk: ['Moonwalk', 'sans-serif'],
+        astro: ['AstroSpace', 'sans-serif'],
+      },
       colors: {
         // Accent color with all the shade variants
         accent: {
