@@ -1,6 +1,6 @@
 import { cloudflareDevProxyVitePlugin as remixCloudflareDevProxy, vitePlugin as remixVitePlugin } from '@remix-run/dev';
 import UnoCSS from 'unocss/vite';
-import { defineConfig, type ViteDevServer } from 'vite';
+import { defineConfig, type ConfigEnv, type UserConfig, type ViteDevServer, type PluginOption } from 'vite';
 import { nodePolyfills } from 'vite-plugin-node-polyfills';
 import { optimizeCssModules } from 'vite-plugin-optimize-css-modules';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -18,15 +18,11 @@ const getGitHash = () => {
   }
 };
 
-
-
-
-export default defineConfig((config) => {
+export default defineConfig((config: ConfigEnv): UserConfig => {
   return {
     define: {
       __COMMIT_HASH: JSON.stringify(getGitHash()),
       __APP_VERSION: JSON.stringify(process.env.npm_package_version),
-      // 'process.env': JSON.stringify(process.env)
     },
     build: {
       target: 'esnext',
@@ -34,22 +30,28 @@ export default defineConfig((config) => {
     plugins: [
       nodePolyfills({
         include: ['path', 'buffer', 'process'],
-      }),
-      config.mode !== 'test' && remixCloudflareDevProxy(),
+      }) as PluginOption,
+      config.mode !== 'test' && remixCloudflareDevProxy() as PluginOption,
       remixVitePlugin({
         future: {
           v3_fetcherPersist: true,
           v3_relativeSplatPath: true,
           v3_throwAbortReason: true,
-          v3_lazyRouteDiscovery: true
+          v3_lazyRouteDiscovery: true,
         },
-      }),
-      UnoCSS(),
-      tsconfigPaths(),
-      chrome129IssuePlugin(),
-      config.mode === 'production' && optimizeCssModules({ apply: 'build' }),
+      }) as PluginOption,
+      UnoCSS() as PluginOption,
+      tsconfigPaths() as PluginOption,
+      chrome129IssuePlugin() as PluginOption,
+      config.mode === 'production' && optimizeCssModules({ apply: 'build' }) as PluginOption,
+    ].filter(Boolean) as PluginOption[],
+    envPrefix: [
+      'VITE_',
+      'OPENAI_LIKE_API_BASE_URL',
+      'OLLAMA_API_BASE_URL',
+      'LMSTUDIO_API_BASE_URL',
+      'TOGETHER_API_BASE_URL',
     ],
-    envPrefix: ["VITE_","OPENAI_LIKE_API_BASE_URL", "OLLAMA_API_BASE_URL", "LMSTUDIO_API_BASE_URL","TOGETHER_API_BASE_URL"],
     css: {
       preprocessorOptions: {
         scss: {
