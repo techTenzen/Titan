@@ -16,7 +16,7 @@ export function Header() {
       })}
     >
       <div className="flex items-center gap-2 z-logo text-bolt-elements-textPrimary cursor-pointer">
-        <div className="i-ph:sidebar-simple-duotone text-xl" />
+        <div className="i-ph:sidebar-simple-duotone text-3xl" />
         <a href="/" className="relative group flex items-center">
           {/* Image logo with significantly increased size */}
           <img src="/image2.png" alt="Titan Logo" style={{ height: '150px', width: 'auto' }} />
